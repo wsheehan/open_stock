@@ -10,8 +10,7 @@ defmodule CallApi do
 
   def get_api(url) do
     hackney = [ hackney: [basic_auth: {"eada4ad55493b61365859339c4c383d3", "4de15d2c4757c9eb733300e8c3691c36"}]]
-    request = HTTPoison.get("https://www.intrinio.com/api/" <> url, [], hackney)
-    response = get_response(request)
+    HTTPoison.get("https://www.intrinio.com/api/" <> url, [], hackney) |> get_response()
   end
 
   def parse_body(body) do
@@ -45,11 +44,9 @@ defmodule CallApi do
   def match_query(query, ticker) do
     cond do
       Repo.all(query) == [] ->
-        IO.puts "No Record Matching"
         params = get_api("companies?ticker=" <> ticker)
         check_response(params, ticker)
       true ->
-        IO.puts "Record Matching"
         %Company{ short_description: description, sector: sector, name: name, mailing_address: mailing_address } = Repo.get_by(Company, ticker: ticker)
         %{ticker: ticker, description: description, sector: sector, name: name, mailing_address: mailing_address}
     end
