@@ -36,8 +36,8 @@ defmodule CallApi do
       _->
         changeset = Company.changeset(%Company{}, params)
         Repo.insert(changeset)
-        %Company{ short_description: description, sector: sector, name: name, mailing_address: mailing_address } = Repo.get_by(Company, ticker: ticker)
-        %{ticker: ticker, description: description, sector: sector, name: name, mailing_address: mailing_address}
+        %Company{ sector: sector, name: name} = Repo.get_by(Company, ticker_symbol: ticker)
+        %{ticker_symbol: ticker, sector: sector, name: name}
     end
   end
 
@@ -47,8 +47,8 @@ defmodule CallApi do
         params = get_api("companies?ticker=" <> ticker)
         check_response(params, ticker)
       true ->
-        %Company{ short_description: description, sector: sector, name: name, mailing_address: mailing_address } = Repo.get_by(Company, ticker: ticker)
-        %{ticker: ticker, description: description, sector: sector, name: name, mailing_address: mailing_address}
+        %Company{ sector: sector, name: name } = Repo.get_by(Company, ticker_symbol: ticker)
+        %{ticker_symbol: ticker, sector: sector, name: name}
     end
   end
 end
