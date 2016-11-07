@@ -4,6 +4,7 @@ defmodule OpenStock.Company do
   schema "companies" do
     field :ticker_symbol, :string
     field :name, :string
+    field :sector, :string
 
     timestamps()
   end
@@ -13,7 +14,7 @@ defmodule OpenStock.Company do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:ticker_symbol, :name])
-    |> validate_required([:ticker_symbol, :name])
+    |> cast(params, [:ticker_symbol, :name, :sector])
+    |> validate_required([:ticker_symbol, :name, :sector])
   end
 end
