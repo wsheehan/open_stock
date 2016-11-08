@@ -5,12 +5,12 @@ defmodule CallApi do
 
   @expected_fields ~w(
     ticker short_description sector
-    name mailing_address
+    name
   )
 
   def get_api(url) do
     hackney = [ hackney: [basic_auth: {"eada4ad55493b61365859339c4c383d3", "4de15d2c4757c9eb733300e8c3691c36"}]]
-    HTTPoison.get("https://www.intrinio.com/api/" <> url, [], hackney) |> get_response()
+    HTTPoison.get("https://api.intrinio.com/" <> url, [], hackney) |> get_response()
   end
 
   def parse_body(body) do
@@ -35,9 +35,9 @@ defmodule CallApi do
         %{error: "Company Not Found"}
       _->
         changeset = Company.changeset(%Company{}, params)
-        Repo.insert(changeset)
-        %Company{ sector: sector, name: name} = Repo.get_by(Company, ticker_symbol: ticker)
-        %{ticker_symbol: ticker, sector: sector, name: name}
+        Repo.insert!(changeset)
+        %Company{ sector: sector, name: name, short_description: short_description} = Repo.get_by(Company, ticker: ticker)
+        %{ticker: ticker, sector: sector, name: name, short_description: short_description}
     end
   end
 
@@ -47,8 +47,8 @@ defmodule CallApi do
         params = get_api("companies?ticker=" <> ticker)
         check_response(params, ticker)
       true ->
-        %Company{ sector: sector, name: name } = Repo.get_by(Company, ticker_symbol: ticker)
-        %{ticker_symbol: ticker, sector: sector, name: name}
+        %Company{ sector: sector, name: name, short_description: short_description} = Repo.get_by(Company, ticker: ticker)
+        %{ticker: ticker, sector: sector, name: name, short_description: short_description}
     end
   end
 end
