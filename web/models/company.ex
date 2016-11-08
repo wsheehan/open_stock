@@ -5,7 +5,7 @@ defmodule OpenStock.Company do
     field :ticker, :string
     field :name, :string
     field :sector, :string
-    field :description, :string
+    field :short_description, :string
 
     timestamps()
   end
@@ -15,7 +15,7 @@ defmodule OpenStock.Company do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:ticker, :name, :sector, :description])
-    |> validate_required([:ticker, :name, :sector, :description])
+    |> cast(params, [:ticker, :name, :sector, :short_description])
+    |> validate_required([:ticker, :name, :sector, :short_description])
   end
 end
