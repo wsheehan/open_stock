@@ -8,12 +8,15 @@ defmodule OpenStock.Watchlist do
     timestamps()
   end
 
+  @required_fields ~w(title)a
+
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:title])
-    |> validate_required([:title])
+    |> cast(params, @required_fields)
+    |> validate_required(@required_fields)
+    |> assoc_constraint(:user)
   end
 end

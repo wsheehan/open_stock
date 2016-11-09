@@ -5,17 +5,20 @@ defmodule OpenStock.User do
     field :email, :string
     field :encrypted_password, :string
     field :password, :string, virtual: true
+    has_many :watchlists, OpenStock.Watchlist
 
     timestamps()
   end
+
+  @required_fields ~w(email)a
 
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:email, :encrypted_password])
-    |> validate_required([:email, :encrypted_password])
+    |> cast(params, @required_fields)
+    |> validate_required(@required_fields)
     |> unique_constraint(:email)
   end
 end
