@@ -4,6 +4,7 @@ defmodule OpenStock.User do
   schema "users" do
     field :email, :string
     field :encrypted_password, :string
+    field :password, :string, virtual: true
 
     timestamps()
   end
