@@ -18,6 +18,8 @@ defmodule OpenStock.Router do
 
     get "/", PageController, :index
     get "/:ticker", CompanyController, :show
+
+    resources "/users", UserController, only: [:show, :new, :create]
   end
 
   # Other scopes may use custom stacks.
