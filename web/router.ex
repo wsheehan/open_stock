@@ -9,12 +9,18 @@ defmodule OpenStock.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :authenticated do
+    plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.LoadResource
+    plug OpenStock.CurrentUser
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
 
   scope "/", OpenStock do
-    pipe_through :browser # Use the default browser stack
+    pipe_through [:browser, :authenticated]
 
     get "/", PageController, :index
     get "/:ticker", CompanyController, :show
