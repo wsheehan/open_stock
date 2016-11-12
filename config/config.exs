@@ -27,8 +27,8 @@ config :guardian, Guardian,
  issuer: "SimpleAuth.#{Mix.env}",
  ttl: {30, :days},
  verify_issuer: true,
- serializer: SimpleAuth.GuardianSerializer,
- secret_key: to_string(Mix.env) <> "SuPerseCret_aBraCadabrA"
+ serializer: OpenStock.GuardianSerializer,
+ secret_key: to_string(Mix.env) <> "wqiuteheriugei124u3hi46jbjhb3KJBRKEBkwbqwiu5iw4u"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

@@ -9,7 +9,6 @@ defmodule OpenStock.SessionController do
 
   def create(conn, %{"session" => %{"email" => email, "password" => password}}) do
     user = Repo.get_by(User, email: email)
-    IO.puts user.encrypted_password
     authenticated = cond do
       user && checkpw(password, user.encrypted_password) ->
         {:ok, login(conn, user)}
@@ -33,11 +32,18 @@ defmodule OpenStock.SessionController do
   end
 
   def delete(conn, _) do
-    # logout user
+    conn
+    |> logout
+    |> put_flash(:info, "You've been logged out")
+    |> redirect(to: page_path(conn, :index))
   end
 
   defp login(conn, user) do
     conn
     |> Guardian.Plug.sign_in(user)
+  end
+
+  defp logout(conn) do
+    Guardian.Plug.sign_out(conn)
   end
 end
