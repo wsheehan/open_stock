@@ -40,7 +40,8 @@ defmodule OpenStock.Mixfile do
      {:cowboy, "~> 1.0"},
      {:csv, "~> 1.4.2"},
      {:httpoison, "~> 0.10.0"},
-     {:comeonin, "~> 2.6"}]
+     {:comeonin, "~> 2.6"},
+     {:guardian, "~> 0.13.0"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
