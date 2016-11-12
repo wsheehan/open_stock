@@ -19,7 +19,7 @@ defmodule OpenStock.Mixfile do
   def application do
     [mod: {OpenStock, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :httpoison, :comonin]]
+                    :phoenix_ecto, :postgrex, :httpoison, :comeonin]]
   end
 
   # Specifies which paths to compile per environment.
