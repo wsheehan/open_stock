@@ -6,7 +6,7 @@ defmodule OpenStock.UserController do
 
   def show(conn, %{"id" => id}) do
     user = Repo.get!(User, id)
-    json conn, user
+    render conn, "show.html", user: user
   end
 
   def new(conn, _params) do
