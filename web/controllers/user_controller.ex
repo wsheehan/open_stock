@@ -1,6 +1,8 @@
 defmodule OpenStock.UserController do
   use OpenStock.Web, :controller
+
   alias OpenStock.User
+  alias OpenStock.Auth
 
   plug :scrub_params, "user" when action in [:create]
 
@@ -20,6 +22,7 @@ defmodule OpenStock.UserController do
     case Repo.insert(changeset) do
       {:ok, user} ->
         conn
+        |> Auth.login(user)
         |> put_flash(:info, "#{user.email} created")
         |> redirect(to: user_path(conn, :show, user))
       {:error, changeset} ->
