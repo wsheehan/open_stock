@@ -9,37 +9,32 @@
 
     <title>Open Stock</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <%= if @current_user do %>
-              <li><%= @current_user.email %> (<%= @current_user.id %>)</li>
-              <li>
-                <%= link "Sign out", to: session_path(@conn, :delete,
-                                                      @current_user),
-                                     method: "delete" %>
-              </li>
-            <% else %>
-              <li><%= link "Register", to: user_path(@conn, :new) %></li>
-              <li><%= link "Sign in", to: session_path(@conn, :new) %></li>
-            <% end %>
-          </ul>
-        </nav>
-        <span class="logo"></span>
-      </header>
+    <header>
+      <div id="navbar">
+        <%= if @current_user do %>
+          <li><%= @current_user.email %></li>
+          <li>
+            <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: "delete" %>
+          </li>
+        <% else %>
+          <li><%= link "Register", to: user_path(@conn, :new) %></li>
+          <li><%= link "Login", to: session_path(@conn, :new) %></li>
+        <% end %>
+      </div>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <div id="open-stock-wrapper">
+        <div id="open-stock">Open Stock</div>
+      </div>
+    </header>
 
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
+    <main role="main">
+      <%= render @view_module, @view_template, assigns %>
+    </main>
 
-    </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

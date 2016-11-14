@@ -1,0 +1,26 @@
+#navbar {
+	padding: 5px;
+	background-color: #d9d9d9; 
+	margin-bottom: 15px;
+}
+
+#navbar li {
+	display: inline-block;
+	padding: 4px;
+	background-color: white;
+	border-radius: 2px;
+}
+
+#open-stock-wrapper {
+	text-align: center;
+}
+
+#open-stock {
+	background-color: #35B872;
+	color: #F2EA3F;
+	display: inline-block;
+	width: 40%;
+	font-size: 3em;
+	border-radius: 10px;
+	padding: 10px;
+}
