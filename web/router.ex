@@ -23,11 +23,13 @@ defmodule OpenStock.Router do
     pipe_through [:browser, :authenticated]
 
     get "/", PageController, :index
-    get "/:ticker", CompanyController, :show
+    get "/companies/:ticker", CompanyController, :show
 
     resources "/users", UserController, only: [:show, :new, :create]
 
     resources "/sessions", SessionController, only: [:new, :create, :delete]
+
+    resources "/watchlists", WatchlistController, only: [:create]
   end
 
   # Other scopes may use custom stacks.

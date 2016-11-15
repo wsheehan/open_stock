@@ -16,7 +16,7 @@
     <header>
       <div id="navbar">
         <%= if @current_user do %>
-          <li><%= @current_user.email %></li>
+          <li><%= link @current_user.email, to: "/users/#{@current_user.id}" %></li>
           <li>
             <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: "delete" %>
           </li>
