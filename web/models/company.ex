@@ -7,6 +7,8 @@ defmodule OpenStock.Company do
     field :sector, :string
     field :short_description, :string
 
+    many_to_many :watchlists, OpenStock.Watchlist, join_through: "companies_watchlists"
+
     timestamps()
   end
 

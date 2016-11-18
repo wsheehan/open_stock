@@ -5,6 +5,8 @@ defmodule OpenStock.Watchlist do
     field :title, :string
     belongs_to :user, OpenStock.User
 
+    many_to_many :companies, OpenStock.Company, join_through: "companies_watchlists"
+
     timestamps()
   end
 
