@@ -2,13 +2,15 @@ defmodule OpenStock.UserController do
   use OpenStock.Web, :controller
 
   alias OpenStock.User
+  alias OpenStock.Company
   alias OpenStock.Auth
 
   plug :scrub_params, "user" when action in [:create]
 
   def show(conn, %{"id" => id}) do
     user = Repo.get!(User, id)
-    render conn, "show.html", user: user
+    companies = Repo.all(Company)
+    render conn, "show.html", user: user, companies: companies
   end
 
   def new(conn, _params) do
