@@ -13,9 +13,10 @@
 			<%= submit "Create Watchlist", class: "btn btn-primary" %>
 		</div>
 	<% end %>
+</div>
 
+<div class="col-sm-6"
 	<%= for watchlist <- @watchlists do %>
-		<p><%= watchlist.title %></p>
 	<% end %>
 </div>
 

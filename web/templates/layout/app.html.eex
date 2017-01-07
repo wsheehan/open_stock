@@ -15,20 +15,19 @@
 
   <body>
     <header>
-      <div id="navbar">
-        <%= if @current_user do %>
-          <li><%= link @current_user.email, to: "/users/#{@current_user.id}" %></li>
-          <li>
-            <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: "delete" %>
-          </li>
-        <% else %>
-          <li><%= link "Register", to: user_path(@conn, :new) %></li>
-          <li><%= link "Login", to: session_path(@conn, :new) %></li>
-        <% end %>
-      </div>
-
       <div id="open-stock-wrapper">
         <div id="open-stock">Open Stock</div>
+        <div id="navbar" class="pull-right">
+          <%= if @current_user do %>
+            <li><%= link @current_user.email, to: "/users/#{@current_user.id}" %></li>
+            <li>
+              <%= link "Logout", to: session_path(@conn, :delete, @current_user), method: "delete" %>
+            </li>
+          <% else %>
+            <li><%= link "Register", to: user_path(@conn, :new) %></li>
+            <li><%= link "Login", to: session_path(@conn, :new) %></li>
+          <% end %>
+        </div>
       </div>
     </header>
 
