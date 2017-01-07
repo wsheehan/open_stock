@@ -1,7 +1,18 @@
-<h1><%= @user.email %></h1>
-
 <h3>Create Watchlist</h3>
 
 <%= form_for @conn, watchlist_path(@conn, :create), [as: :watchlist], fn f -> %>
+	<div>
+		<label>Title</label>
+		<input type="text" name="watchlist[title]">
+	</div>
+	<%= for company <- @companies do %>
+		<div>
+			<label><input type="checkbox" name="watchlist[company]" value="<%= company.id %>"><%= company.name %> (<%= company.name %>)</label>
+		</div>
+	<% end %>
 	<%= submit "Create Watchlist", class: "btn btn-primary" %>
+<% end %>
+
+<%= for watchlist <- @watchlists do %>
+	<p><%= watchlist.title %></p>
 <% end %>

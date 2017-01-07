@@ -1,16 +1,24 @@
 defmodule OpenStock.UserController do
   use OpenStock.Web, :controller
 
+  import Ecto.Query, only: [from: 2]
+
   alias OpenStock.User
   alias OpenStock.Company
+  alias OpenStock.Watchlist
+
   alias OpenStock.Auth
 
   plug :scrub_params, "user" when action in [:create]
 
   def show(conn, %{"id" => id}) do
-    user = Repo.get!(User, id)
+    user = User
+    |> Repo.get!(id)
+    |> Repo.preload(:watchlists)
+
     companies = Repo.all(Company)
-    render conn, "show.html", user: user, companies: companies
+
+    render conn, "show.html", user: user, companies: companies, watchlists: user.watchlists
   end
 
   def new(conn, _params) do
