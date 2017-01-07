@@ -3,6 +3,7 @@ defmodule OpenStock.Watchlist do
 
   schema "watchlists" do
     field :title, :string
+    field :description, :string
     belongs_to :user, OpenStock.User
 
     many_to_many :companies, OpenStock.Company, join_through: "companies_watchlists"
