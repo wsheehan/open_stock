@@ -15,4 +15,9 @@ defmodule OpenStock.WatchlistController do
     conn
     |> redirect(to: "/users/#{current_user.id}")
   end
+
+  def index(conn, _params, current_user) do
+    current_user_with_watchlists = Repo.preload(current_user, :watchlists)
+    render conn, "index.html", watchlists: current_user_with_watchlists.watchlists
+  end
 end

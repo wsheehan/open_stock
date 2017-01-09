@@ -29,7 +29,7 @@ defmodule OpenStock.Router do
 
     resources "/sessions", SessionController, only: [:new, :create, :delete]
 
-    resources "/watchlists", WatchlistController, only: [:create]
+    resources "/watchlists", WatchlistController, only: [:create, :index]
   end
 
   # Other scopes may use custom stacks.
