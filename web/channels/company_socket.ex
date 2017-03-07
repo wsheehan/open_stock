@@ -2,7 +2,7 @@ defmodule OpenStock.CompanySocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", OpenStock.RoomChannel
+  channel "room:*", OpenStock.PriceChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
