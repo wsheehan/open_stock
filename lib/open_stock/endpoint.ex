@@ -1,7 +1,7 @@
 defmodule OpenStock.Endpoint do
   use Phoenix.Endpoint, otp_app: :open_stock
 
-  socket "/socket", OpenStock.UserSocket
+  socket "/socket", OpenStock.CompanySocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #

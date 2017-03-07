@@ -1,4 +1,4 @@
-defmodule OpenStock.UserSocket do
+defmodule OpenStock.CompanySocket do
   use Phoenix.Socket
 
   ## Channels
