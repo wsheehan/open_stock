@@ -2,8 +2,6 @@
 // and connect at the socket path in "lib/my_app/endpoint.ex":
 import {Socket} from "phoenix"
 
-let socket = new Socket("/socket", {params: {token: window.userToken}})
-
 // When you connect, you'll often need to authenticate the client.
 // For example, imagine you have an authentication plug, `MyAuth`,
 // which authenticates the session and assigns a `:current_user`.
@@ -48,29 +46,52 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 // Finally, pass the token on connect as below. Or remove it
 // from connect if you don't care about authentication.
 
-socket.connect()
+let username = "eada4ad55493b61365859339c4c383d3";
+let password = "4de15d2c4757c9eb733300e8c3691c36";
 
-// Now that you are connected, you can join channels with a topic:
-let channel           = socket.channel("room:lobby", {})
-let chatInput         = document.querySelector("#chat-input")
-let messagesContainer = document.querySelector("#messages")
-
-chatInput.addEventListener("keypress", event => {
-  if(event.keyCode === 13){
-    channel.push("new_msg", {body: chatInput.value})
-    chatInput.value = ""
+$.ajax({
+  type: "GET",
+  url: "https://realtime.intrinio.com/auth",
+  beforeSend: function(xhr) {
+    xhr.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
+  },
+  success: function(token) {
+    console.log("Successful Connnection");
+    connect(token);
+  },
+  error: function(xhr, status, error) {
+    console.error("Error connecting: ", error);
   }
-});
+})
 
-channel.on("new_msg", payload => {
-  let messageItem = document.createElement("li");
-  console.log("New msg");
-  messageItem.innerText = `[${Date()}] ${payload.body}`
-  messagesContainer.appendChild(messageItem)
-});
+let socket_url = "wss://realtime.intrinio.com/socket";
 
-channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
-  .receive("error", resp => { console.log("Unable to join", resp) })
+let connect = function(token) {
+  let socket = new Socket(socket_url, { params: { token: token } });
+  socket.connect();
+  socket.onClose(function (e) {
+    return console.log("CLOSE", e);
+  });
+
+  startListening(socket);
+}
+
+let startListening = function(socket) {
+  let channel = socket.channel("iex:securities:AAPL", {})
+  channel.join()
+    .receive("ok", resp => { console.log("Joined successfully", resp) })
+
+  channel.on("quote", function(msg) {
+    console.log(msg);
+  });
+
+  // Heart Beat Message
+  setInterval(() => {
+    console.log("Heartbeat");
+    let hearbeat_channel = socket.channel("phoenix", {"event": "heartbeat", "payload": {}, "ref": null});
+    hearbeat_channel.join()
+      .receive("ok", resp => { console.log("Heartbeat Successful", resp) })
+  }, 20000)
+}
 
 export default socket
