@@ -1,0 +1,53 @@
+/* Show */
+.price-box {
+  padding: 15px;
+  text-align: center;
+  font-size: 3em;
+  border: 1px dotted red;
+}
+
+#open-stock-wrapper {
+	background-color: #35B872;
+	color: #F2EA3F;
+	padding: 10px;
+	padding-left: 10%;
+}
+
+#open-stock {
+	display: inline-block;
+	font-size: 3em;
+}
+
+#navbar {
+	display: inline-block;
+	padding-right: 10%;
+}
+
+#navbar li {
+	display: inline-block;
+	padding: 5px;
+	padding-right: 10px;
+}
+
+#navbar li a {
+	color: #F2EA3F;
+}
+
+.sign-in h1 {
+  text-align: center;
+}
+
+/* This file is for your main application css. */
+
+body, html {
+	font-family: 'Roboto', sans-serif;
+	padding: 0;
+	margin: 0;
+}
+
+a:hover {
+	text-decoration: none !important;
+}
+
+
+/*# sourceMappingURL=app.css.map*/

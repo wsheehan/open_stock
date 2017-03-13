@@ -1,0 +1,7 @@
+<p><%= @ticker %></p>
+
+<div class="container">
+  <div class="row">
+    <div id="<%= @ticker %>-price" class="price-box col-sm-2">140.05</div>
+  </div>
+</div>
