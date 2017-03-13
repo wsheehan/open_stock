@@ -7,7 +7,6 @@ defmodule OpenStock.CompanyController do
         where: company.ticker == ^ticker,
         select: company
 
-    # json conn, CallApi.match_query(query, ticker)
-    render conn, "show.html" 
+    json conn, CallApi.match_query(query, ticker)
   end
 end
