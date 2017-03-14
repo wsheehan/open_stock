@@ -1,3 +1,18 @@
+# dependencies
+/node_modules
+
+# compiled output
+/dist
+/tmp
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage/*
+/libpeerconnection.log
+npm-debug.log*
+testem.log
+
 # App artifacts
 /api/_build
 /api/db
@@ -6,9 +21,6 @@
 
 # Generated on crash by the VM
 /api/erl_crash.dump
-
-# Static artifacts
-/api/node_modules
 
 # Since we are building assets from web/static,
 # we ignore priv/static. You may want to comment
