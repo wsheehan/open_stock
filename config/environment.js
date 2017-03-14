@@ -3,6 +3,7 @@
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'open-stock',
+    podModulePrefix: 'open-stock/pods',
     environment: environment,
     rootURL: '/',
     locationType: 'auto',
