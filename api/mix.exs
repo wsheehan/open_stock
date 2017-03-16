@@ -19,7 +19,7 @@ defmodule OpenStock.Mixfile do
   def application do
     [mod: {OpenStock, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :httpoison, :comeonin]]
+                    :phoenix_ecto, :postgrex, :httpoison, :comeonin, :corsica]]
   end
 
   # Specifies which paths to compile per environment.
@@ -41,7 +41,8 @@ defmodule OpenStock.Mixfile do
      {:csv, "~> 1.4.2"},
      {:httpoison, "~> 0.10.0"},
      {:comeonin, "~> 2.6"},
-     {:guardian, "~> 0.13.0"}]
+     {:guardian, "~> 0.13.0"},
+     {:corsica, "~> 0.5"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
