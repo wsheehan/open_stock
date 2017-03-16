@@ -47,8 +47,8 @@ defmodule CallApi do
         params = get_api("companies?ticker=" <> ticker)
         check_response(params, ticker)
       true ->
-        %Company{ sector: sector, name: name, short_description: short_description} = Repo.get_by(Company, ticker: ticker)
-        %{ticker: ticker, sector: sector, name: name, short_description: short_description}
+        %Company{ sector: sector, name: name, short_description: short_description, id: id} = Repo.get_by(Company, ticker: ticker)
+        %{ticker: ticker, sector: sector, name: name, short_description: short_description, id: id}
     end
   end
 end
