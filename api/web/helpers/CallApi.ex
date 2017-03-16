@@ -36,8 +36,8 @@ defmodule CallApi do
       _->
         changeset = Company.changeset(%Company{}, params)
         Repo.insert!(changeset)
-        %Company{ sector: sector, name: name, short_description: short_description} = Repo.get_by(Company, ticker: ticker)
-        %{ticker: ticker, sector: sector, name: name, short_description: short_description}
+        %Company{ sector: sector, name: name, short_description: short_description, id: id} = Repo.get_by(Company, ticker: ticker)
+        %{ticker: ticker, sector: sector, name: name, short_description: short_description, id: id}
     end
   end
 
