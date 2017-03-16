@@ -22,6 +22,11 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+# Accept json
+config :plug, :mimes, %{
+  "application/vnd.api+json" => ["json-api"]
+}
+
 # Configue Guardian Auth
 config :guardian, Guardian,
  issuer: "SimpleAuth.#{Mix.env}",

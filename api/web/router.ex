@@ -16,11 +16,11 @@ defmodule OpenStock.Router do
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug :accepts, ["html", "json-api"]
   end
 
   scope "/", OpenStock do
-    pipe_through [:browser, :authenticated]
+    pipe_through [:api]
 
     get "/", PageController, :index
     get "/companies/:ticker", CompanyController, :show
