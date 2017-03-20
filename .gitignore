@@ -12,6 +12,8 @@
 /libpeerconnection.log
 npm-debug.log*
 testem.log
+.jshintrc
+.editorconfig
 
 # App artifacts
 /api/_build
