@@ -4,3 +4,7 @@
 <p>{{model.name}}</p>
 <p>{{model.sector}}</p>
 <p>{{model.shortDescription}}</p>
+
+{{ticker-big ticker=model.ticker listenToCompany=(route-action "listenToCompany")}}
+
+{{#link-to "companies.show" "NFLX"}}NFLX{{/link-to}}
