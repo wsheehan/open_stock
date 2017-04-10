@@ -3,6 +3,7 @@ defmodule OpenStock.WatchlistController do
 
   alias OpenStock.Watchlist
   alias OpenStock.User
+  alias OpenStock.Company
 
   # def action(conn, _) do
   #   apply(__MODULE__, action_name(conn), [conn, conn.params, conn.assigns.current_user])
@@ -17,11 +18,19 @@ defmodule OpenStock.WatchlistController do
   end
 
   def index(conn, _params) do
-    # current_user_with_watchlists = Repo.preload(current_user, :watchlists)
     query = from w in Watchlist,
+      join: c in assoc(w, :companies),
       where: w.user_id == 11,
-      select: map(w, [:title, :description, :id])
+      preload: [:companies],
+      select: map(w, [:title, :description, :id, companies: [:ticker, :name, :sector, :short_description]])
+
+    watchlists = Repo.all(query)
 
     json conn, %{ watchlists: Repo.all(query) }
   end
+
+  # def update(conn, params) do
+  #   watchlist = Repo.get(Watchlist, id)
+  #   changeset = Ecto.Changeset.change watchlist, params
+  # end
 end
