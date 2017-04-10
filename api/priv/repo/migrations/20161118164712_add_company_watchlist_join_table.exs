@@ -4,7 +4,7 @@ defmodule OpenStock.Repo.Migrations.AddCompanyWatchlistJoinTable do
   def change do
     create table(:companies_watchlists, primary_key: false) do
       add :watchlist_id, references(:watchlists)
-      add :companies, references(:companies)
+      add :company_id, references(:companies)
     end
   end
 end
